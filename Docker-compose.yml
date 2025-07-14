@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  db-master:
+    image: mysql:8.0
+    container_name: mysql_master
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_informacion
+      MYSQL_ROOT_HOST: '%'
+    command:
+      --server-id=1 
+      --log-bin=mysql-bin
+      --binlog-do-db=db_informacion
+      --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_master_data:/var/lib/mysql
+      - ./BDD/master/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  db-slave:
+    image: mysql:8.0
+    container_name: mysql_slave
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_informacion
+      MYSQL_ROOT_HOST: '%'
+    command:
+      --server-id=2
+      --relay-log=relay-log-server
+      --log-slave-updates=1
+      --read-only=1
+      --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3307:3306
+    volumes:
+      - mysql_slave_data:/var/lib/mysql
+      - ./BDD/slave/init.sql:/docker-entrypoint-initdb.d/init.sql
+    depends_on:
+      - db-master
+
+    
+  phpmyadmin:
+    image: phpmyadmin:latest
+    environment:
+      PMA_HOSTS: "db-master,db-slave"
+      PMA_ARBITRARY: 1
+    ports:
+      - 8081:80
+
+volumes:
+  mysql_master_data:
+  mysql_slave_data:
+
