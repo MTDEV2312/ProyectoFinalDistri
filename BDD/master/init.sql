@@ -11,6 +11,14 @@ CREATE TABLE IF NOT EXISTS productos (
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Crear tabla de usuarios
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    correo VARCHAR(255) NOT NULL UNIQUE,
+    contrasenia VARCHAR(255) NOT NULL,
+    day_entered TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 
 -- Configurar binlog
 SET GLOBAL binlog_format = 'ROW';
