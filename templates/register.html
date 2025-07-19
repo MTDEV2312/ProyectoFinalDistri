@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f1f1;
+            display: flex;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-container {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], 
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .flash-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        .login-link a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .password-requirements {
+            font-size: 12px;
+            color: #666;
+            margin-top: -5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Crear Cuenta</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('register') }}">
+            <input type="email" name="email" placeholder="Correo electrónico" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <input type="password" name="confirm_password" placeholder="Confirmar contraseña" required>
+            <div class="password-requirements">
+                La contraseña debe tener al menos 8 caracteres
+            </div>
+            <button type="submit">Registrarse</button>
+        </form>
+        
+        <div class="login-link">
+            ¿Ya tienes una cuenta? <a href="{{ url_for('login') }}">Inicia sesión</a>
+        </div>
+    </div>
+</body>
+</html>

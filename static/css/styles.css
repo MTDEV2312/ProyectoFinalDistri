@@ -1,0 +1,167 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --light-color: #ecf0f1;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8f9fa;
+    overflow-x: hidden;
+}
+
+/* Layout Principal */
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    min-height: 100vh;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: var(--primary-color);
+    color: #fff;
+    transition: all 0.3s;
+    height: 100vh;
+    position: fixed;
+    overflow-y: auto;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: var(--secondary-color);
+    text-align: center;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+}
+
+#sidebar ul li a {
+    padding: 10px 20px;
+    color: var(--light-color);
+    display: block;
+    text-decoration: none;
+    border-left: 4px solid transparent;
+}
+
+#sidebar ul li a:hover {
+    background: var(--secondary-color);
+    border-left: 4px solid var(--accent-color);
+}
+
+#sidebar ul li.active > a {
+    background: var(--secondary-color);
+    border-left: 4px solid var(--accent-color);
+}
+
+#sidebar ul li a i {
+    margin-right: 10px;
+}
+
+/* Contenido Principal */
+#content {
+    width: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+    margin-left: 250px;
+}
+
+/* Barra superior */
+.navbar {
+    padding: 15px 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box i {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #6c757d;
+}
+
+.search-box input {
+    padding-left: 35px;
+    border-radius: 20px;
+}
+
+.user-profile {
+    cursor: pointer;
+}
+
+/* Estado de Nodos */
+.node-status-container {
+    padding: 20px;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.node-status {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.node-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.node-indicator.active {
+    background: var(--success-color);
+}
+
+.node-indicator.inactive {
+    background: var(--danger-color);
+}
+
+/* Tarjetas */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background: #fff;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    
+    #sidebar.active {
+        margin-left: 0;
+    }
+    
+    #content {
+        margin-left: 0;
+    }
+    
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+
+
