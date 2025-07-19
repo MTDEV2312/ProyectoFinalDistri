@@ -368,11 +368,10 @@ def register():
     if request.method == 'POST':
         correo = request.form.get('email', '').strip()
         password = request.form.get('password', '').encode('utf-8')
-        nombre = request.form.get('nombre', '').strip()
-        
+
         if not correo or not password:
             flash('Por favor complete todos los campos', 'danger')
-            return render_template('auth/register.html')
+            return render_template('/register.html')
         
         try:
             # Generar hash de la contraseña
@@ -380,9 +379,9 @@ def register():
             
             cur = mysql.connection.cursor()
             cur.execute("""
-                INSERT INTO usuarios (correo, contrasenia, nombre) 
-                VALUES (%s, %s, %s)
-            """, (correo, hashed.decode('utf-8'), nombre))
+                INSERT INTO usuarios (correo, contrasenia) 
+                VALUES (%s, %s)
+            """, (correo, hashed.decode('utf-8')))
             mysql.connection.commit()
             cur.close()
             
@@ -394,7 +393,7 @@ def register():
             logger.error(f"Error al registrar usuario: {str(e)}")
             flash('Error al registrar usuario. El correo ya existe.', 'danger')
             
-    return render_template('auth/register.html')
+    return render_template('/register.html')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
