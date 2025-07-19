@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +10,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     {% block extra_css %}{% endblock %}
 </head>
+
 <body>
     <div class="wrapper">
         <!-- Sidebar -->
         <nav id="sidebar">
+            <!-- Cambia solo la parte del sidebar-header -->
             <div class="sidebar-header">
+                <div class="text-center mb-3">
+                    <img src="https://i.ibb.co/Pvp28x4f/Dise-o-sin-t-tulo-5.jpg" alt="Logo" class="sidebar-logo"
+                        style="height: 100px;">
+                </div>
                 <h4>Gestión de Productos</h4>
             </div>
-            
+
             <ul class="list-unstyled components">
                 <li class="{% if active_page == 'dashboard' %}active{% endif %}">
                     <a href="{{ url_for('dashboard') }}">
@@ -44,7 +51,7 @@
                     </a>
                 </li>
             </ul>
-            
+
             <!-- Estado de Nodos -->
             <div class="node-status-container">
                 <h6>Estado de Nodos</h6>
@@ -80,7 +87,7 @@
                     </div>
                 </div>
             </nav>
-            
+
             <!-- Contenido dinámico -->
             <div class="container-fluid mt-4">
                 {% block content %}{% endblock %}
@@ -92,4 +99,5 @@
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% block extra_js %}{% endblock %}
 </body>
+
 </html>
