@@ -42,13 +42,5 @@ CREATE TABLE IF NOT EXISTS usuarios (
     day_entered TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Inicializa los Usuarios
-INSERT INTO usuarios (correo, contrasenia) VALUES 
-('paul_dev@mail.com',    '$2b$12$uJvFQ1uFlME1S.vUbIUEnujGoNGqtVeITnRGkDR30EwF9vfsNSXNu'),
-('matias.data@mail.com', '$2b$12$XBg1Jc5FdmcfBeq2hhAjOORp43zMQYBzknfYoAQnUqaLUgJ/WG8Ya'),
-('nico_admin@mail.com',  '$2b$12$6bDP9Y3ovmE2Fzjwyy4PQeHegPsmY8CZWZZQh5fvYlzN3HgrUuE1W');
-
---
-
 -- Configurar binlog
 SET GLOBAL binlog_format = 'ROW';
