@@ -1,4 +1,7 @@
 -- Script de inicialización de la base de datos para el proyecto BDD
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
+
 USE db_informacion;
 -- Crea tabla de categorías
 CREATE TABLE IF NOT EXISTS categorias (
