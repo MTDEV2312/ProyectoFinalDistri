@@ -25,6 +25,8 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: db_informacion
       MYSQL_ROOT_HOST: '%'
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
     command:
       --server-id=1 
       --log-bin=mysql-bin
@@ -43,6 +45,8 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: db_informacion
       MYSQL_ROOT_HOST: '%'
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
     command:
       --server-id=2
       --relay-log=relay-log-server

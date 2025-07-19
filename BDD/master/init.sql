@@ -1,5 +1,7 @@
-
 -- Inicialización de la base de datos para el sistema de gestión de productos
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
+
 USE db_informacion;
 
 -- Crea tabla de categorías
