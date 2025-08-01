@@ -11,6 +11,11 @@
                 <li class="breadcrumb-item active" aria-current="page">Inicio</li>
             </ol>
         </nav>
+        <!-- Mostrar información de la instancia -->
+        <div class="alert alert-info" role="alert">
+            <i class="bi bi-server"></i> 
+            <strong>Servidor:</strong> {{ app_instance or 'No especificado' }}
+        </div>
     </div>
 </div>
 

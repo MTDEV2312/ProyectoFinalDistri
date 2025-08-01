@@ -1,5 +1,6 @@
 import config
 import bcrypt
+import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_mysqldb import MySQL
 import logging
@@ -7,9 +8,13 @@ import logging
 app = Flask(__name__)
 app.secret_key = "your_secret_key_here"  # Cambia esto por una clave secreta fuerte
 
+# Obtener el identificador de la instancia desde variable de entorno
+APP_INSTANCE = os.getenv('APP_INSTANCE', 'Unknown')
+
 # Configuración de logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
+logger.info(f"Iniciando aplicación Flask - {APP_INSTANCE}")
 
 # Configuración de la base de datos MySQL
 app.config['MYSQL_HOST'] = config.Config.MYSQL_HOST
@@ -25,6 +30,15 @@ mysql = MySQL(app)
 @app.route('/')
 def home():
     return redirect(url_for('login'))
+
+@app.route('/instance-info')
+def instance_info():
+    """Endpoint para verificar qué instancia está respondiendo"""
+    return {
+        'instance': APP_INSTANCE,
+        'status': 'running',
+        'message': f'Respuesta desde {APP_INSTANCE}'
+    }
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -117,7 +131,8 @@ def dashboard():
                              disponibles=disponibles,
                              bajo_stock=bajo_stock,
                              agotados=agotados,
-                             ultimos_productos=ultimos_productos)
+                             ultimos_productos=ultimos_productos,
+                             app_instance=APP_INSTANCE)
         
     except Exception as e:
         logger.error(f"Error al cargar dashboard: {str(e)}")
